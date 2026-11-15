@@ -22,7 +22,20 @@ def set_slot(html: str, name: str, content: str) -> str:
     return pattern.sub(lambda m: m.group(1) + content + m.group(3), html, count=1)
 
 
-def fill_template(career: dict, facts_per_role: int = 2) -> str:
+def remove_section(html: str, name: str) -> str:
+    pattern = re.compile(rf'<section data-section="{name}">.*?</section>\s*', re.S)
+    assert pattern.search(html), f"section {name} missing"
+    return pattern.sub("", html, count=1)
+
+
+def _bullet(fact: dict, detail: bool) -> str:
+    text = fact["what"]
+    if detail:
+        text = ". ".join(filter(None, [fact["what"], fact.get("how"), fact.get("outcome")]))
+    return f"<li>{text}</li>"
+
+
+def fill_template(career: dict, facts_per_role: int = 2, detail: bool = False) -> str:
     html = TEMPLATE.read_text(encoding="utf-8")
     profile = career["profile"]
     html = set_slot(html, "name", profile["name"])
@@ -30,7 +43,7 @@ def fill_template(career: dict, facts_per_role: int = 2) -> str:
     html = set_slot(html, "summary", "Experienced analyst.")
     roles = []
     for role in career["roles"]:
-        bullets = "".join(f"<li>{f['what']}</li>" for f in role["facts"][:facts_per_role])
+        bullets = "".join(_bullet(f, detail) for f in role["facts"][:facts_per_role])
         roles.append(
             '<div class="role"><div class="role-head">'
             f'<span class="role-title">{role["title"]}</span>'
@@ -45,6 +58,23 @@ def fill_template(career: dict, facts_per_role: int = 2) -> str:
         for e in career.get("education", [])
     )
     html = set_slot(html, "education", edu)
+    projects = "".join(
+        f'<div class="role"><div class="role-head"><span class="role-title">{p["name"]}</span></div>'
+        f'<ul>{"".join(_bullet(f, detail) for f in p["facts"])}</ul></div>'
+        for p in career.get("projects", [])
+    )
+    if projects:
+        html = set_slot(html, "projects", projects)
+    else:
+        html = remove_section(html, "projects")
+    certs = "".join(
+        f'<p>{c["name"]}{" (" + str(c["year"]) + ")" if c.get("year") else ""}</p>'
+        for c in career.get("certifications", [])
+    )
+    if certs:
+        html = set_slot(html, "certifications", certs)
+    else:
+        html = remove_section(html, "certifications")
     html = set_slot(html, "skills", ", ".join(career.get("skills", [])))
     return html
 

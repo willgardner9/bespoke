@@ -55,3 +55,25 @@ def test_salary_rejected_anywhere():
     top = copy.deepcopy(data)
     top["preferences"]["salary"] = "£60k"
     assert any("salary" in e for e in validate_career(top))
+
+
+def test_project_is_valid():
+    data = load("career.sample.yaml")
+    data["projects"] = [
+        {"id": "p1", "name": "Personal pipeline", "facts": [{"id": "p1-f1", "what": "Used dbt on a side project", "source": "interview"}]}
+    ]
+    assert validate_career(data) == []
+
+
+def test_project_fact_source_checked():
+    data = load("career.sample.yaml")
+    data["projects"] = [
+        {"id": "p1", "name": "Personal pipeline", "facts": [{"id": "p1-f1", "what": "Used dbt", "source": "rumour"}]}
+    ]
+    assert any("projects[0]" in e and "source" in e for e in validate_career(data))
+
+
+def test_project_missing_name_flagged():
+    data = load("career.sample.yaml")
+    data["projects"] = [{"id": "p1", "facts": []}]
+    assert any("projects[0]" in e and "name" in e for e in validate_career(data))

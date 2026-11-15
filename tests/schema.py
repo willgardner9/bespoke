@@ -49,4 +49,12 @@ def validate_career(data: dict) -> list[str]:
             _require(fact, ["id", "what", "source"], fwhere, errors)
             if fact.get("source") and fact["source"] not in SOURCES:
                 errors.append(f"{fwhere}.source: must be one of {sorted(SOURCES)}")
+    for i, project in enumerate(data.get("projects") or []):
+        where = f"projects[{i}]"
+        _require(project, ["id", "name"], where, errors)
+        for j, fact in enumerate(project.get("facts") or []):
+            fwhere = f"{where}.facts[{j}]"
+            _require(fact, ["id", "what", "source"], fwhere, errors)
+            if fact.get("source") and fact["source"] not in SOURCES:
+                errors.append(f"{fwhere}.source: must be one of {sorted(SOURCES)}")
     return errors

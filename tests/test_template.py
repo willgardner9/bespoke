@@ -9,7 +9,7 @@ import yaml
 from render_helpers import TEMPLATE, fill_template, find_chrome, page_count, render_pdf
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
-SLOTS = ["name", "contact", "summary", "experience", "education", "skills"]
+SLOTS = ["name", "contact", "summary", "experience", "projects", "education", "certifications", "skills"]
 
 
 def template() -> str:
@@ -90,3 +90,40 @@ def test_no_letter_spacing_or_case_transform():
     css = template()
     assert "letter-spacing" not in css
     assert "text-transform" not in css
+
+
+PROJECT = {
+    "id": "p1",
+    "name": "Personal analytics pipeline",
+    "facts": [{"id": "p1-f1", "what": "Built a personal analytics pipeline with dbt", "source": "interview"}],
+}
+
+
+@needs_chrome
+@needs_pdftotext
+def test_certifications_and_projects_extract_as_whole_headings(tmp_path):
+    data = career("career.sample.yaml")
+    data["projects"] = [PROJECT]
+    pdf = render_pdf(fill_template(data), tmp_path)
+    text = subprocess.run(["pdftotext", str(pdf), "-"], capture_output=True, text=True, check=True).stdout
+    for heading in ("Projects", "Certifications"):
+        assert re.search(rf"^{heading}$", text, re.M), heading
+    assert "Tableau Desktop Specialist" in text
+    assert "dbt" in text
+
+
+@needs_chrome
+@needs_pdftotext
+def test_empty_optional_sections_are_removed(tmp_path):
+    data = career("career.sample.yaml")
+    data["certifications"] = []
+    pdf = render_pdf(fill_template(data), tmp_path)
+    text = subprocess.run(["pdftotext", str(pdf), "-"], capture_output=True, text=True, check=True).stdout
+    assert "Certifications" not in text
+    assert "Projects" not in text
+
+
+@needs_chrome
+def test_long_career_in_full_detail_really_overflows_two_pages(tmp_path):
+    pdf = render_pdf(fill_template(career("career.long.yaml"), facts_per_role=99, detail=True), tmp_path)
+    assert page_count(pdf) > 2

@@ -8,6 +8,7 @@
 |-----|------|-------|
 | `profile` | mapping | `name` (required), `email`, `phone`, `location`, `links[]` |
 | `roles` | list | Non-empty. Newest first. See below |
+| `projects` | list | Work that belongs to no role (side projects, unpaid or personal work). `id` (`p1`), `name`, `facts[]` with ids `p<n>-f<n>` and the same fact fields |
 | `education` | list | `institution`, `qualification`, `start`, `end` (`YYYY-MM`) |
 | `certifications` | list | `name`, `year` |
 | `skills` | list | Plain strings, written as the person would say them |

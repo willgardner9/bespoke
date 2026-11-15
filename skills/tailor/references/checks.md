@@ -20,8 +20,9 @@ Rewording, reordering and using the ad's vocabulary for something that is true a
 Read the extracted PDF text and check:
 
 - the reading order is correct: name, contact line, summary, then experience newest first, education, skills;
-- the headings are the standard words Summary, Experience, Education, Skills, extracted whole;
+- the headings are the standard words Summary, Experience, Education, Skills (plus Projects and Certifications when present), extracted whole;
 - accents and en dashes in names and dates survived (for example "Zoë Ñuñez", "Mar 2021 – Present");
 - there are no tables, columns, icons, images or text boxes in the HTML;
 - the PDF is at most two pages;
+- the `<style>` block in `cv.html` is identical to the template's, and no element inside a slot carries a `style=` attribute;
 - keyword coverage: list every `Keywords` entry that is true of the candidate (backed by a `met` or `partial` requirement) but missing from the CV text, and fail if there are any.
