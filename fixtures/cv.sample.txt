@@ -1,0 +1,19 @@
+ZOË ÑUÑEZ
+Manchester, UK | zoe.nunez@example.com | +44 7700 900123
+
+SENIOR DATA ANALYST, Brightwell Retail (Mar 2021 - present)
+- Rebuilt the weekly trading dashboard in Tableau
+- Ran A/B tests on checkout changes
+- Managed stakeholders across merchandising, finance and product
+- Mentored two junior analysts
+
+DATA ANALYST, Calder & Sons, Leeds (Sep 2018 - Feb 2021)
+- SQL reporting for sales and stock
+- Demand forecasting in Python
+
+RESEARCH ASSISTANT, Pennine Research, Sheffield (Jul 2016 - Aug 2018)
+- Survey data cleaning and analysis
+
+EDUCATION: BSc Mathematics and Statistics, University of Sheffield (2012-2016)
+CERTIFICATIONS: Tableau Desktop Specialist (2022)
+SKILLS: SQL, Python, Tableau, PostgreSQL, A/B testing
