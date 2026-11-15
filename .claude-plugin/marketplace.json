@@ -1,0 +1,11 @@
+{
+  "name": "bespoke",
+  "owner": { "name": "Will" },
+  "plugins": [
+    {
+      "name": "bespoke",
+      "source": "./",
+      "description": "Career intake, job-fit analysis and tailored ATS-friendly CVs."
+    }
+  ]
+}

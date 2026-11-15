@@ -1,0 +1,11 @@
+# Personal data never belongs in the skills repo
+career.yaml
+*/cv.pdf
+*/cv.html
+*/job-ad.md
+*/fitting.md
+
+# Tooling
+.superpowers/
+__pycache__/
+.pytest_cache/
