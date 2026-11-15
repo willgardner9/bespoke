@@ -1,0 +1,362 @@
+profile:
+  name: Zoë Ñuñez
+  email: zoe.nunez@example.com
+  phone: +44 7700 900123
+  location: Manchester, UK
+  links: []
+roles:
+- id: r8
+  company: Ravensworth Health
+  title: Head of Analytics
+  start: 2022-08
+  end: present
+  location: UK
+  context: Ravensworth Health analytics function.
+  facts:
+  - id: r8-f1
+    what: Delivered a reporting suite at Ravensworth Health
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 16% efficiency gain
+    source: linkedin
+  - id: r8-f2
+    what: Delivered a forecasting model at Ravensworth Health
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 24% efficiency gain
+    source: interview
+  - id: r8-f3
+    what: Delivered a data quality programme at Ravensworth Health
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 32% efficiency gain
+    source: cv
+  - id: r8-f4
+    what: Delivered an automated pipeline at Ravensworth Health
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 40% efficiency gain
+    source: linkedin
+  - id: r8-f5
+    what: Delivered a customer segmentation at Ravensworth Health
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 48% efficiency gain
+    source: interview
+- id: r7
+  company: Kestrel Mobility
+  title: Senior BI Developer
+  start: 2020-07
+  end: 2022-07
+  location: UK
+  context: Kestrel Mobility analytics function.
+  facts:
+  - id: r7-f1
+    what: Delivered a reporting suite at Kestrel Mobility
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 14% efficiency gain
+    source: cv
+  - id: r7-f2
+    what: Delivered a forecasting model at Kestrel Mobility
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 21% efficiency gain
+    source: linkedin
+  - id: r7-f3
+    what: Delivered a data quality programme at Kestrel Mobility
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 28% efficiency gain
+    source: interview
+  - id: r7-f4
+    what: Delivered an automated pipeline at Kestrel Mobility
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 35% efficiency gain
+    source: cv
+  - id: r7-f5
+    what: Delivered a customer segmentation at Kestrel Mobility
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 42% efficiency gain
+    source: linkedin
+- id: r6
+  company: Aldgate Insurance
+  title: BI Developer
+  start: 2018-06
+  end: 2020-06
+  location: UK
+  context: Aldgate Insurance analytics function.
+  facts:
+  - id: r6-f1
+    what: Delivered a reporting suite at Aldgate Insurance
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 12% efficiency gain
+    source: interview
+  - id: r6-f2
+    what: Delivered a forecasting model at Aldgate Insurance
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 18% efficiency gain
+    source: cv
+  - id: r6-f3
+    what: Delivered a data quality programme at Aldgate Insurance
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 24% efficiency gain
+    source: linkedin
+  - id: r6-f4
+    what: Delivered an automated pipeline at Aldgate Insurance
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 30% efficiency gain
+    source: interview
+  - id: r6-f5
+    what: Delivered a customer segmentation at Aldgate Insurance
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 36% efficiency gain
+    source: cv
+- id: r5
+  company: Fenwick Media
+  title: Reporting Analyst
+  start: 2016-05
+  end: 2018-05
+  location: UK
+  context: Fenwick Media analytics function.
+  facts:
+  - id: r5-f1
+    what: Delivered a reporting suite at Fenwick Media
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 10% efficiency gain
+    source: linkedin
+  - id: r5-f2
+    what: Delivered a forecasting model at Fenwick Media
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 15% efficiency gain
+    source: interview
+  - id: r5-f3
+    what: Delivered a data quality programme at Fenwick Media
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 20% efficiency gain
+    source: cv
+  - id: r5-f4
+    what: Delivered an automated pipeline at Fenwick Media
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 25% efficiency gain
+    source: linkedin
+  - id: r5-f5
+    what: Delivered a customer segmentation at Fenwick Media
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 30% efficiency gain
+    source: interview
+- id: r4
+  company: Tindall Logistics
+  title: Data Analyst
+  start: 2014-04
+  end: 2016-04
+  location: UK
+  context: Tindall Logistics analytics function.
+  facts:
+  - id: r4-f1
+    what: Delivered a reporting suite at Tindall Logistics
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 8% efficiency gain
+    source: cv
+  - id: r4-f2
+    what: Delivered a forecasting model at Tindall Logistics
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 12% efficiency gain
+    source: linkedin
+  - id: r4-f3
+    what: Delivered a data quality programme at Tindall Logistics
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 16% efficiency gain
+    source: interview
+  - id: r4-f4
+    what: Delivered an automated pipeline at Tindall Logistics
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 20% efficiency gain
+    source: cv
+  - id: r4-f5
+    what: Delivered a customer segmentation at Tindall Logistics
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 24% efficiency gain
+    source: linkedin
+- id: r3
+  company: Marlow Energy
+  title: Analytics Manager
+  start: 2012-03
+  end: 2014-03
+  location: UK
+  context: Marlow Energy analytics function.
+  facts:
+  - id: r3-f1
+    what: Delivered a reporting suite at Marlow Energy
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 6% efficiency gain
+    source: interview
+  - id: r3-f2
+    what: Delivered a forecasting model at Marlow Energy
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 9% efficiency gain
+    source: cv
+  - id: r3-f3
+    what: Delivered a data quality programme at Marlow Energy
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 12% efficiency gain
+    source: linkedin
+  - id: r3-f4
+    what: Delivered an automated pipeline at Marlow Energy
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 15% efficiency gain
+    source: interview
+  - id: r3-f5
+    what: Delivered a customer segmentation at Marlow Energy
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 18% efficiency gain
+    source: cv
+- id: r2
+  company: Olcott Foods
+  title: Senior Insight Analyst
+  start: 2010-02
+  end: 2012-02
+  location: UK
+  context: Olcott Foods analytics function.
+  facts:
+  - id: r2-f1
+    what: Delivered a reporting suite at Olcott Foods
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 4% efficiency gain
+    source: linkedin
+  - id: r2-f2
+    what: Delivered a forecasting model at Olcott Foods
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 6% efficiency gain
+    source: interview
+  - id: r2-f3
+    what: Delivered a data quality programme at Olcott Foods
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 8% efficiency gain
+    source: cv
+  - id: r2-f4
+    what: Delivered an automated pipeline at Olcott Foods
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 10% efficiency gain
+    source: linkedin
+  - id: r2-f5
+    what: Delivered a customer segmentation at Olcott Foods
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 12% efficiency gain
+    source: interview
+- id: r1
+  company: Harbour & Reid
+  title: Insight Analyst
+  start: 2008-01
+  end: 2010-01
+  location: UK
+  context: Harbour & Reid analytics function.
+  facts:
+  - id: r1-f1
+    what: Delivered a reporting suite at Harbour & Reid
+    how: Worked with finance stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 2% efficiency gain
+    source: cv
+  - id: r1-f2
+    what: Delivered a forecasting model at Harbour & Reid
+    how: Worked with operations stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 3% efficiency gain
+    source: linkedin
+  - id: r1-f3
+    what: Delivered a data quality programme at Harbour & Reid
+    how: Worked with sales stakeholders using SQL, Python and BI tooling, documenting each step for reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 4% efficiency gain
+    source: interview
+  - id: r1-f4
+    what: Delivered an automated pipeline at Harbour & Reid
+    how: Worked with product stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 5% efficiency gain
+    source: cv
+  - id: r1-f5
+    what: Delivered a customer segmentation at Harbour & Reid
+    how: Worked with executive stakeholders using SQL, Python and BI tooling, documenting each step for
+      reuse
+    outcome: Adopted across the business and kept in use for over a year
+    metric: 6% efficiency gain
+    source: linkedin
+education:
+- institution: University of Sheffield
+  qualification: BSc Mathematics and Statistics
+  start: 2004-09
+  end: 2008-06
+certifications: []
+skills:
+- SQL
+- Python
+- Tableau
+- Power BI
+- Forecasting
+achievements: []
+preferences:
+  target_roles:
+  - Analytics Manager
+  avoid: []
+  locations:
+  - Manchester

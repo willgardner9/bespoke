@@ -1,0 +1,96 @@
+profile:
+  name: Zoë Ñuñez
+  email: zoe.nunez@example.com
+  phone: "+44 7700 900123"
+  location: Manchester, UK
+  links:
+    - https://www.linkedin.com/in/zoe-nunez-example
+roles:
+  - id: r3
+    company: Brightwell Retail
+    title: Senior Data Analyst
+    start: "2021-03"
+    end: present
+    location: Manchester
+    context: Analytics team of six supporting merchandising and e-commerce.
+    facts:
+      - id: r3-f1
+        what: Rebuilt the weekly trading dashboard in Tableau
+        how: Replaced 14 spreadsheets with one governed Tableau workbook fed by SQL views
+        outcome: Weekly reporting went from two days of manual work to automated refresh
+        metric: "2 days saved per week"
+        source: interview
+      - id: r3-f2
+        what: Ran A/B tests on checkout changes
+        how: Designed tests, set sample sizes, analysed results in Python and presented to product leads
+        outcome: Shipped a one-page checkout that improved conversion
+        metric: "+3.1% conversion"
+        source: interview
+      - id: r3-f3
+        what: Managed stakeholders across merchandising, finance and product
+        how: Weekly prioritisation call, written requirement briefs, agreed delivery dates
+        outcome: Cut ad-hoc requests that bypassed the queue
+        source: interview
+      - id: r3-f4
+        what: Mentored two junior analysts
+        how: Fortnightly code review sessions in SQL and Python
+        outcome: Both were promoted within 18 months
+        source: cv
+  - id: r2
+    company: Calder & Sons
+    title: Data Analyst
+    start: "2018-09"
+    end: "2021-02"
+    location: Leeds
+    context: Regional wholesaler, small finance and operations analytics function.
+    facts:
+      - id: r2-f1
+        what: Wrote SQL reporting for sales and stock
+        how: Joined ERP exports in PostgreSQL and scheduled nightly reports
+        outcome: Finance closed month-end a day earlier
+        metric: "1 day faster month-end"
+        source: cv
+      - id: r2-f2
+        what: Built a demand forecast in Python
+        how: Seasonal time-series model validated against the previous two years
+        outcome: Reduced stock-outs on the top 50 lines
+        source: interview
+  - id: r1
+    company: Pennine Research
+    title: Research Assistant
+    start: "2016-07"
+    end: "2018-08"
+    location: Sheffield
+    context: Market research agency.
+    facts:
+      - id: r1-f1
+        what: Cleaned and analysed survey data
+        how: Excel and early Python scripts for weighting and cross-tabs
+        outcome: Delivered client tables for 30+ studies
+        source: linkedin
+education:
+  - institution: University of Sheffield
+    qualification: BSc Mathematics and Statistics
+    start: "2012-09"
+    end: "2016-06"
+certifications:
+  - name: Tableau Desktop Specialist
+    year: 2022
+skills:
+  - SQL
+  - Python
+  - Tableau
+  - PostgreSQL
+  - A/B testing
+  - Stakeholder management
+achievements:
+  - Analytics team award for the trading dashboard rebuild, 2022
+preferences:
+  target_roles:
+    - Senior Data Analyst
+    - Analytics Lead
+  avoid:
+    - Pure reporting roles
+  locations:
+    - Manchester
+    - Remote (UK)
