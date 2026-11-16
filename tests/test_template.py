@@ -127,3 +127,35 @@ def test_empty_optional_sections_are_removed(tmp_path):
 def test_long_career_in_full_detail_really_overflows_two_pages(tmp_path):
     pdf = render_pdf(fill_template(career("career.long.yaml"), facts_per_role=99, detail=True), tmp_path)
     assert page_count(pdf) > 2
+
+
+def test_template_sample_groups_roles_under_an_employer():
+    html = template()
+    for marker in ('class="employer"', 'class="emp-head"', 'class="roles'):
+        assert marker in html, marker
+
+
+def promoted(data: dict) -> dict:
+    """Two consecutive roles at one employer: a promotion."""
+    data["roles"][1]["company"] = data["roles"][0]["company"]
+    data["roles"][1]["location"] = data["roles"][0].get("location")
+    return data
+
+
+@needs_chrome
+@needs_pdftotext
+def test_one_employer_with_two_roles_names_the_employer_once(tmp_path):
+    data = promoted(career("career.sample.yaml"))
+    company = data["roles"][0]["company"]
+    pdf = render_pdf(fill_template(data), tmp_path)
+    text = subprocess.run(["pdftotext", str(pdf), "-"], capture_output=True, text=True, check=True).stdout
+    assert text.count(company) == 1
+    for role in data["roles"][:2]:
+        assert role["title"] in text
+
+
+def test_grouping_keeps_one_employer_block_per_company():
+    data = promoted(career("career.sample.yaml"))
+    html = fill_template(data)
+    assert html.count('class="employer"') == len({r["company"] for r in data["roles"]})
+    assert html.count('class="roles multi"') == 1

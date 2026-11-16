@@ -41,25 +41,36 @@ def fill_template(career: dict, facts_per_role: int = 2, detail: bool = False) -
     html = set_slot(html, "name", profile["name"])
     html = set_slot(html, "contact", " | ".join(filter(None, [profile.get("location"), profile.get("email"), profile.get("phone")])))
     html = set_slot(html, "summary", "Experienced analyst.")
-    roles = []
+    employers: list[list[dict]] = []
     for role in career["roles"]:
-        bullets = "".join(_bullet(f, detail) for f in role["facts"][:facts_per_role])
-        roles.append(
-            '<div class="role"><div class="role-head">'
-            f'<span class="role-title">{role["title"]}</span>'
-            f'<span class="dates">{month(role["start"])} – {month(role["end"])}</span></div>'
-            f'<div class="company">{role["company"]}</div><ul>{bullets}</ul></div>'
-        )
+        if employers and employers[-1][0]["company"] == role["company"]:
+            employers[-1].append(role)
+        else:
+            employers.append([role])
+    roles = []
+    for group in employers:
+        multi = len(group) > 1
+        span = f'{month(group[-1]["start"])} – {month(group[0]["end"])}'
+        loc = group[0].get("location")
+        block = f'<div class="employer"><div class="emp-head"><span>{group[0]["company"]}</span><span class="span">{span}</span></div>'
+        if loc:
+            block += f'<div class="loc">{loc}</div>'
+        block += f'<div class="roles {"multi" if multi else "single"}">'
+        for role in group:
+            bullets = "".join(_bullet(f, detail) for f in role["facts"][:facts_per_role])
+            dates = f'<span class="dates">{month(role["start"])} – {month(role["end"])}</span>' if multi else ""
+            block += (f'<div class="role"><div class="role-head"><span>{role["title"]}</span>{dates}</div>'
+                      f'<ul>{bullets}</ul></div>')
+        roles.append(block + "</div></div>")
     html = set_slot(html, "experience", "".join(roles))
     edu = "".join(
-        f'<div class="role"><div class="role-head"><span class="role-title">{e["qualification"]}</span>'
-        f'<span class="dates">{month(e["start"])} – {month(e["end"])}</span></div>'
-        f'<div class="company">{e["institution"]}</div></div>'
+        f'<div class="item"><span><b>{e["qualification"]}</b>, {e["institution"]}</span>'
+        f'<span>{month(e["start"])} – {month(e["end"])}</span></div>'
         for e in career.get("education", [])
     )
     html = set_slot(html, "education", edu)
     projects = "".join(
-        f'<div class="role"><div class="role-head"><span class="role-title">{p["name"]}</span></div>'
+        f'<div class="role"><div class="role-head"><span>{p["name"]}</span></div>'
         f'<ul>{"".join(_bullet(f, detail) for f in p["facts"])}</ul></div>'
         for p in career.get("projects", [])
     )

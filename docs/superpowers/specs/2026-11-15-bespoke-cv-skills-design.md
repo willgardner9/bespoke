@@ -190,10 +190,10 @@ Flow:
    (job title terms, tools, methods, phrasing from the must-haves), in the
    summary, bullets and skills list; keep to two pages.
 2. Fill the HTML template: name and contact line, short summary, work
-   experience (title, company, dates right-aligned, bullets), education,
+   experience grouped by employer (employer, overall span, location once, then each role with its own dates and bullets; a vertical rule marks multi-role employers), education,
    skills as a plain comma-separated list. Single column, black on white,
    Arial or Helvetica, standard section headings, no icons, tables,
-   columns or graphics; dates formatted like "Mar 2021 – Present".
+   columns or graphics; dates formatted like "Mar 2021 – Present". Weight and size carry the hierarchy; still black and white.
 3. Render to `cv.pdf` (fallback chain above); keep `cv.html`.
 4. **Parallel check agents:** a fact-checker that traces every bullet back
    to `career.yaml` and fails on anything untraceable; an ATS checker that

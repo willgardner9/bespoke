@@ -35,6 +35,7 @@ Create a task list with these phases and keep it updated:
 - Start from the `Must-haves` in `fitting.md`: lead with the facts cited as evidence for `met` and `partial` items.
 - Mirror the ad's exact terms from `Keywords`, in the summary, bullets and skills list, but only for keywords backed by a `met` or `partial` requirement. **Never mirror a keyword that belongs to a `gap`**, and never add a tool, qualification or claim that is not in `career.yaml`.
 - Reword and reorder facts freely; keep every employer, title, date, number, tool and the scope of each claim ("led" vs "contributed to", "owned" vs "supported") exactly as `career.yaml` has it.
+- Group roles by employer: consecutive roles in `career.yaml` with the same `company` (for example promotions) are one employer block, never repeated as separate jobs. Employers run newest first, and roles within an employer run newest first.
 - Roles run newest first. Give recent, relevant roles the most bullets; condense older or less relevant roles to one or two lines, and drop the least relevant if needed. Fit two pages by condensing content, **never by shrinking type or editing the template's CSS**.
 - Relevant achievements become bullets under the role they came from. Relevant certifications go in the `certifications` slot. Facts under `projects` go in the `projects` slot when they evidence a requirement; this is where a side-project answer confirmed during `fitting` appears.
 - Skills are a plain comma-separated list of evidenced skills, using the ad's wording where true.
@@ -43,7 +44,7 @@ Create a task list with these phases and keep it updated:
 
 ## 2. Fill the template
 
-Copy `assets/cv-template.html` to `<company>/cv.html`. Replace only the content between each pair of markers, `<!--slot:NAME-->` and `<!--/slot:NAME-->`, for the slots `name`, `contact`, `summary`, `experience`, `projects`, `education`, `certifications`, `skills`. `projects` and `certifications` are optional: Remove the whole section (the `<section data-section="...">` element, heading included) when there is nothing to show. Reuse the role and bullet markup exactly as the sample in the template does. Dates read like "Mar 2021 – Present" (en dash). Leave the `<style>` block untouched.
+Copy `assets/cv-template.html` to `<company>/cv.html`. Replace only the content between each pair of markers, `<!--slot:NAME-->` and `<!--/slot:NAME-->`, for the slots `name`, `contact`, `summary`, `experience`, `projects`, `education`, `certifications`, `skills`. `projects` and `certifications` are optional: Remove the whole section (the `<section data-section="...">` element, heading included) when there is nothing to show. Reuse the markup exactly as the sample in the template does: one `<div class="employer">` per employer, with the employer name, its overall span (earliest start to latest end across its roles) and the location stated once; roles go inside `<div class="roles multi">` when the employer has two or more roles (each role shows its own dates) or `<div class="roles single">` with no role dates when it has one. Education entries use the `item` markup shown in the template. Dates read like "Mar 2021 – Present" (en dash). Leave the `<style>` block untouched.
 
 ## 3. Render
 
