@@ -35,10 +35,11 @@
   .role { margin-top: 7pt; }
   .roles.single .role { margin-top: 3pt; }
   .role-head { display: flex; justify-content: space-between; align-items: baseline; font-weight: bold; font-size: 10.5pt; break-after: avoid; }
-  .role-head .dates { font-weight: normal; font-size: 10pt; }
+  .role-head .dates { font-weight: normal; font-size: 10pt; color: #666; }
   ul { margin: 3pt 0 0 13pt; padding: 0; }
   li { margin-bottom: 2pt; break-inside: avoid; }
   .item { display: flex; justify-content: space-between; margin-bottom: 5pt; }
+  .item .span { color: #666; }
 </style>
 </head>
 <body>
@@ -64,7 +65,7 @@
 
 <section>
   <h2>Education</h2>
-  <div data-slot="education"><!--slot:education--><div class="item"><span><b>Qualification</b>, Institution</span><span>Sep 2012 – Jun 2016</span></div><!--/slot:education--></div>
+  <div data-slot="education"><!--slot:education--><div class="item"><span><b>Qualification</b>, Institution</span><span class="span">Sep 2012 – Jun 2016</span></div><!--/slot:education--></div>
 </section>
 
 <section data-section="certifications">
