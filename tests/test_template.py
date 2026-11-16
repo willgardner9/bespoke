@@ -42,10 +42,16 @@ def test_font_is_arial_or_helvetica():
     assert families and all(f.strip().lower().startswith(("arial", "helvetica")) for f in families)
 
 
-GREY_RULES = (r"\.roles\.multi\s*\{[^}]*\}", r"\.emp-head \.span\s*\{[^}]*\}", r"\.loc\s*\{[^}]*\}")
+GREY_RULES = (
+    r"\.roles\.multi\s*\{[^}]*\}",
+    r"\.emp-head \.span\s*\{[^}]*\}",
+    r"\.loc\s*\{[^}]*\}",
+    r"\.role-head \.dates\s*\{[^}]*\}",
+    r"\.item \.span\s*\{[^}]*\}",
+)
 
 
-def test_colours_are_black_and_white_except_three_grey_details():
+def test_colours_are_black_and_white_except_five_grey_details():
     css = template()
     assert not re.search(r"rgba?\(|hsla?\(", css)
     rest = css
@@ -57,10 +63,10 @@ def test_colours_are_black_and_white_except_three_grey_details():
     assert hexes <= {"#000", "#000000", "#fff", "#ffffff"}
 
 
-def test_location_and_employer_dates_are_mid_grey_and_the_rule_is_hairline():
+def test_location_and_all_dates_are_mid_grey_and_the_rule_is_hairline():
     css = template()
-    assert "#666" in re.search(GREY_RULES[1], css).group(0)
-    assert "#666" in re.search(GREY_RULES[2], css).group(0)
+    for pattern in GREY_RULES[1:]:
+        assert "#666" in re.search(pattern, css).group(0), pattern
     rule = re.search(GREY_RULES[0], css).group(0)
     assert float(re.search(r"border-left:\s*([\d.]+)pt", rule).group(1)) <= 0.5
 

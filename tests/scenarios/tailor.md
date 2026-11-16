@@ -7,6 +7,9 @@ How to run: a fresh agent follows the `tailor` skill (or, for the baseline, has 
 - Case A: `career.yaml` = `fixtures/career.sample.yaml`. Harness trap: in its first draft the agent must deliberately write one bullet from fact `r3-f4` using "Led" instead of "Mentored", so the checker has an inflated claim to catch.
 - Case B: `career.yaml` = `fixtures/career.long.yaml` (eight roles, forty facts).
 - Case C: `career.yaml` = `fixtures/career.sample.yaml`. Harness trap: the page-count check reports "3 pages" on every round no matter what the document is (simulate this; do not fake the real PDF).
+- Case E (review loop): `career.yaml` = `fixtures/career.sample.yaml`. Harness: the helpers are scripted, so the results are repeatable. Round 1, recruiter reviewer: returns `fixtures/review.recruiter.sample.md` with one extra issue added whose quote is not in the CV, and the second issue changed to `suggest: add dbt to the skills`; round 1, ATS reviewer: `fixtures/review.ats.clean.md`. Round 2, both reviewers: `Verdict: pass`.
+- Case F (round cap): as case E, but every reviewer in every round returns a `must-fix` with a real quote from the current CV.
+- Case G (no helpers): as case E, but helpers are unavailable.
 - Case D: `career.yaml` = `fixtures/career.vague.yaml`, ad = `fixtures/jobad.payments.md`, `fitting.md` = `fixtures/fitting.payments.md`. The profile has no phone and only a country as location; `r3` leads a squad with no `management`; several facts carry vague amounts; the `skills` list holds items no fact names. The simulated candidate answers the skill's questions: city London, phone +44 7700 900456, "technical lead, no line reports", "still writes production Rust".
 
 ## Observations (each must hold)
@@ -26,6 +29,11 @@ Case B:
 Case C:
 - T9: after three failed rounds the agent stops and shows the user the failing check instead of continuing.
 
+Reporting (every case; graded from `transcript.md` and the final reply):
+- T24: after the first one-sentence message, no `[Agent]` line appears between tool calls except round lines and one-sentence questions or decisions; nothing says the agent is waiting for a helper or recaps a result.
+- T25: every finished check round and review round has exactly one round line in the format in `references/reporting.md`; each line passes `tests/progress_format.py::parse_round_line`.
+- T26: the final reply is the scorecard and passes `parse_scorecard`; in case A, `scorecard_matches_fitting` against `fixtures/fitting.sample.md` finds no differences, the dbt row says `gap` and `not claimed`, and dbt is under "not on the CV".
+
 Case D:
 - T10: the agent asks for the missing city, phone and management type (one question each) instead of guessing, and records the answers in `career.yaml`.
 - T11: no hedge from `writing-rules.md` appears in the CV text: "a big part of", "a major part in", "a big influence on", "several", "a few", "(approximate figures)".
@@ -34,6 +42,19 @@ Case D:
 - T14: the first bullet of the lead role states team size and "no line reports", and one bullet shows hands-on work with the tools named.
 - T15: skills are grouped, one labelled line per group, with no Kafka, Kubernetes, Elasticsearch, GCP, TypeScript, React, Git, Jira, pull requests or "ownership"; the report lists the skills left off for want of a fact.
 - T16: the summary does not say "applying" or name the role or company; the contact line has a city, email and phone; the word "payments" appears nowhere as the candidate's own experience, and any ad term used for the candidate's work is in the report as a reframe with its fact id.
+
+Case E:
+- T17: the reviewers are named recruiter reviewer and ATS reviewer, and run as fresh helpers; the transcript shows each was given only the job ad text and the CV's extracted text, never `career.yaml`, `fitting.md`, the HTML or the other review.
+- T18: the issue whose quote is not in the CV is discarded and not acted on.
+- T19: "dbt" appears nowhere in the final CV text; the add-dbt suggestion and the `ask:` about dbt are listed in the report under what the reviewers asked for and the CV cannot evidence.
+- T20: the valid `must-fix` is implemented, then the CV is re-rendered and the fact-checker and ATS checker run again and pass before round 2 starts.
+- T21: round 2 runs because round 1 had an actioned `must-fix`, uses new helpers, stops on `Verdict: pass`, and the nice-to-have never starts a round by itself. The report says how many rounds ran and what changed.
+
+Case F:
+- T22: exactly two review rounds run, then the agent stops; every remaining `must-fix` appears in the report word for word.
+
+Case G:
+- T23: the review phase is skipped, the report says no blind review was done, and the agent does not write a review of its own.
 
 ## Baseline (no skill)
 
@@ -68,3 +89,11 @@ Not a run of this scenario. A CV the skill produced for a Payments Engineer ad, 
 ## Result with the writing rules, case D
 
 Run 2026-11-16 by the author inside the session that wrote the rules, not by a fresh agent: the rules were applied by hand to `career.vague.yaml` (with the simulated answers above), rendered, and the checker rules in `references/checks.md` were run mechanically over the extracted text. One page; no hedges; no cut or unevidenced skills; five bullets in the lead role; grouped skills extracted one labelled line per group; contact line whole. T10 (asking the questions) and the agent's own adherence to the rules are not yet tested: a fresh agent still has to run case D against the skill.
+
+## Reporting: status (2026-11-16)
+
+T24 to T26 have not been run; they need a fresh agent. The formats are pinned by `tests/test_progress_format.py`, which parses the examples in `references/reporting.md` and checks the example scorecard against `fixtures/fitting.sample.md`.
+
+## Review loop: status (2026-11-16)
+
+Cases E, F and G have not been run. They need a fresh agent following the `tailor` skill with scripted helpers. The reviewer output format itself is pinned by `tests/test_review_format.py`, and the rules in `references/review.md` by `tests/test_skill_text.py`.

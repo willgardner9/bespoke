@@ -11,7 +11,7 @@ Agentic job-application skills for Claude Code. Give it your career history once
 | `tailor` | Writes a CV for that job from your career record, in a plain format ATS systems read correctly | `<company>/cv.html`, `<company>/cv.pdf` |
 | `bespoke` | Runs the whole thing for a new job ad | all of the above |
 
-The CV only ever uses facts from your `career.yaml`. It mirrors the job ad's wording heavily where it is true of you, and never invents or inflates a claim. It is written to plain rules: results first, the tools named, no hedging, each point made once, leadership stated plainly, skills grouped and only those a role evidences. If your record lacks a city, a phone number, how you lead people or what you built something with, it asks rather than guesses.
+The CV only ever uses facts from your `career.yaml`. It mirrors the job ad's wording heavily where it is true of you, and never invents or inflates a claim. It is written to plain rules: results first, the tools named, no hedging, each point made once, leadership stated plainly, skills grouped and only those a role evidences. If your record lacks a city, a phone number, how you lead people or what you built something with, it asks rather than guesses. Before it hands the CV over, two reviewers who see only the job ad and the CV (a recruiter and an ATS) read it blind and flag problems, for up to two rounds; their advice is only acted on where your record backs it.
 
 ## Install
 
