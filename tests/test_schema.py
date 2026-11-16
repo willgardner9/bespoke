@@ -1,6 +1,7 @@
 import copy
 from pathlib import Path
 
+import pytest
 import yaml
 
 from schema import validate_career
@@ -77,3 +78,53 @@ def test_project_missing_name_flagged():
     data = load("career.sample.yaml")
     data["projects"] = [{"id": "p1", "facts": []}]
     assert any("projects[0]" in e and "name" in e for e in validate_career(data))
+
+
+def test_vague_career_fixture_is_valid():
+    assert validate_career(load("career.vague.yaml")) == []
+
+
+def test_tech_management_and_hands_on_are_accepted():
+    data = load("career.sample.yaml")
+    data["roles"][0]["management"] = "Technical lead of a squad of 15, no line reports"
+    data["roles"][0]["hands_on"] = "Still writes production Python"
+    data["roles"][0]["facts"][0]["tech"] = ["Tableau", "SQL"]
+    assert validate_career(data) == []
+
+
+def test_tech_must_be_a_list_of_strings():
+    data = load("career.sample.yaml")
+    data["roles"][0]["facts"][0]["tech"] = "Tableau"
+    assert any("tech" in e for e in validate_career(data))
+    data["roles"][0]["facts"][0]["tech"] = []
+    assert any("tech" in e for e in validate_career(data))
+
+
+def test_management_must_be_text():
+    data = load("career.sample.yaml")
+    data["roles"][0]["management"] = ["line manager"]
+    assert any("management" in e for e in validate_career(data))
+
+
+@pytest.mark.parametrize("metric", ["several thousand", "a few thousand pounds", "many users", "a lot of requests"])
+def test_vague_metric_rejected(metric):
+    data = load("career.sample.yaml")
+    data["roles"][0]["facts"][0]["metric"] = metric
+    assert any("metric" in e for e in validate_career(data))
+
+
+@pytest.mark.parametrize("metric", ["at least 2,000 a day", "up to 100,000 a day", "+3.1% conversion", "over 40 services"])
+def test_figure_or_bound_metric_accepted(metric):
+    data = load("career.sample.yaml")
+    data["roles"][0]["facts"][0]["metric"] = metric
+    assert validate_career(data) == []
+
+
+def test_project_fact_tech_and_metric_checked():
+    data = load("career.sample.yaml")
+    data["projects"] = [
+        {"id": "p1", "name": "Pipeline", "facts": [{"id": "p1-f1", "what": "Built it", "source": "interview", "tech": "dbt", "metric": "several"}]}
+    ]
+    errors = validate_career(data)
+    assert any("projects[0]" in e and "tech" in e for e in errors)
+    assert any("projects[0]" in e and "metric" in e for e in errors)

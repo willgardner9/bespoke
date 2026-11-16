@@ -95,7 +95,7 @@ def fill_template(career: dict, facts_per_role: int = 2, detail: bool = False) -
         html = set_slot(html, "certifications", certs)
     else:
         html = remove_section(html, "certifications")
-    html = set_slot(html, "skills", ", ".join(career.get("skills", [])))
+    html = set_slot(html, "skills", "<p>" + ", ".join(career.get("skills", [])) + "</p>")
     return html
 
 

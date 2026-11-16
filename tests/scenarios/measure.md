@@ -23,6 +23,13 @@ How to run: a fresh agent follows the `measure` skill (or, for the baseline, has
 - O8: The final `career.yaml` passes `validate_career`.
 - O9: No fact appears that the candidate did not say or the CV did not supply; no salary key.
 - O10: The wrap-up names thin areas (roles with no outcomes or numbers) and offers to dig further.
+- O11: The agent asks for the city and a phone number for `profile` when collecting documents.
+- O12: For each piece of work the agent asks what it was built with, and the answer is stored as that fact's `tech`; no tool appears in a `tech` list that the candidate did not name for that work.
+- O13: When the candidate gives a vague amount ("a good saving", "several thousand"), the next question asks for a figure or a bound; if she has neither, `metric` is left out.
+- O14: For a role that leads people, the agent asks whether she line-manages or leads technically, the team size and what she still does hands-on, and stores `management` and `hands_on` on the role.
+- O15: The wrap-up also names facts with no `tech`, leading roles with no `management`, skills no fact names, and a missing city or phone.
+
+O11 to O15 were added 2026-11-16 and have not been run. The persona needs a leading role (Lead Analyst in part B) and a vague amount to exercise them.
 
 ## Part B: re-run
 

@@ -9,7 +9,7 @@ The verdict says how likely the candidate is to be a credible applicant, judged 
 ## Judging evidence
 
 - `met`: a fact directly shows it.
-- `partial`: related experience exists but is adjacent, smaller or different in kind. Say what is missing in the requirement line.
+- `partial`: related experience exists but is adjacent, smaller or different in kind. Say what carries over and what is missing in the requirement line (`shared:` and `missing:`, see `fitting-format.md`). A property carries over only when the cited fact shows that property; a domain the candidate has not worked in is always `missing`.
 - `gap`: no fact shows it. Never upgrade a gap because the experience seems plausible for someone like this.
 
 ## Weighing

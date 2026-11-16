@@ -1,0 +1,100 @@
+# Synthetic. Reproduces the failure modes seen in a real tailored CV: vague amounts, an
+# ambiguous "lead" role, facts with no stack, a skills list with unevidenced items, and a
+# profile with no city or phone. Used by tests/scenarios/tailor.md case D.
+profile:
+  name: Alex Morgan
+  email: alex.morgan@example.com
+  location: United Kingdom
+roles:
+  - id: r3
+    company: Halden Systems
+    title: Staff Software Engineer - Engineering Lead
+    start: "2024-03"
+    end: present
+    location: London
+    context: Platform engineering for a screening product in financial crime compliance.
+    facts:
+      - id: r3-f1
+        what: Led a squad of 10 engineers, 2 QAs, 2 product and 1 UX that owns several core platform services
+        outcome: Services run with high availability for enterprise customers
+        source: interview
+      - id: r3-f2
+        what: Architected the services as an event-driven pipeline; each service ingests events, applies business logic and emits its own events
+        how: Pulsar for events, Postgres for state, HTTP APIs consumed by internal teams and customers
+        tech: [Pulsar, Postgres, HTTP APIs]
+        source: interview
+      - id: r3-f3
+        what: Worked in a regulated area where every action must be auditable
+        outcome: Auditability was a big part of our tech planning
+        source: interview
+      - id: r3-f4
+        what: Delivered a customer-facing feature in under 2 weeks for a customer close to leaving
+        outcome: A major part in saving a contract worth multiple millions of dollars
+        source: interview
+      - id: r3-f5
+        what: Rolled out basic alerting across the company's microservices
+        how: Datadog and PagerDuty configuration, raised as one bulk pull request
+        tech: [Datadog, PagerDuty]
+        metric: "over 40 services across over 20 squads"
+        source: interview
+      - id: r3-f6
+        what: Overhauled the idempotency of an email-sending service
+        how: After a repeated-send loop found in QA testing that cost several thousand pounds, added idempotency keys and alerting; a manual off switch limited the damage
+        tech: [Postgres, Datadog]
+        source: interview
+      - id: r3-f7
+        what: Made the case to buy rather than build a forms product
+        outcome: Spent a few thousand dollars, which saved a few thousand in engineering time
+        source: interview
+  - id: r2
+    company: Halden Systems
+    title: Senior Software Engineer
+    start: "2022-01"
+    end: "2024-02"
+    location: London
+    context: Same product, earlier team.
+    facts:
+      - id: r2-f1
+        what: Owned the to-do list service that ingests work from other services into users' lists
+        how: Inbox pattern with a database-led queue, separating cheap event ingest from expensive async writes
+        tech: [Postgres, Pulsar, Rust]
+        outcome: No to-dos lost and 100% availability on writes
+        metric: "millions of items a day"
+        source: interview
+  - id: r1
+    company: Tidewater
+    title: Full Stack Engineer
+    start: "2019-06"
+    end: "2021-12"
+    location: Remote
+    context: Early-stage consumer app.
+    facts:
+      - id: r1-f1
+        what: Owned the mobile app and its APIs
+        how: React Native, Node.js, Firebase
+        tech: [React Native, Node.js, Firebase]
+        source: cv
+education:
+  - institution: University of Leeds
+    qualification: BSc Computer Science
+    start: "2015-09"
+    end: "2019-06"
+skills:
+  - Event-driven architecture
+  - Pulsar
+  - Kafka
+  - Postgres
+  - Rust
+  - TypeScript
+  - React
+  - Node.js
+  - Datadog
+  - PagerDuty
+  - Kubernetes
+  - Elasticsearch
+  - GCP
+  - Infrastructure as code
+  - Git
+  - Jira
+  - Pull requests and code review
+  - Ownership

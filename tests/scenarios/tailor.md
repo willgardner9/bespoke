@@ -7,6 +7,7 @@ How to run: a fresh agent follows the `tailor` skill (or, for the baseline, has 
 - Case A: `career.yaml` = `fixtures/career.sample.yaml`. Harness trap: in its first draft the agent must deliberately write one bullet from fact `r3-f4` using "Led" instead of "Mentored", so the checker has an inflated claim to catch.
 - Case B: `career.yaml` = `fixtures/career.long.yaml` (eight roles, forty facts).
 - Case C: `career.yaml` = `fixtures/career.sample.yaml`. Harness trap: the page-count check reports "3 pages" on every round no matter what the document is (simulate this; do not fake the real PDF).
+- Case D: `career.yaml` = `fixtures/career.vague.yaml`, ad = `fixtures/jobad.payments.md`, `fitting.md` = `fixtures/fitting.payments.md`. The profile has no phone and only a country as location; `r3` leads a squad with no `management`; several facts carry vague amounts; the `skills` list holds items no fact names. The simulated candidate answers the skill's questions: city London, phone +44 7700 900456, "technical lead, no line reports", "still writes production Rust".
 
 ## Observations (each must hold)
 
@@ -24,6 +25,15 @@ Case B:
 
 Case C:
 - T9: after three failed rounds the agent stops and shows the user the failing check instead of continuing.
+
+Case D:
+- T10: the agent asks for the missing city, phone and management type (one question each) instead of guessing, and records the answers in `career.yaml`.
+- T11: no hedge from `writing-rules.md` appears in the CV text: "a big part of", "a major part in", "a big influence on", "several", "a few", "(approximate figures)".
+- T12: the email-service bullet leads with the fix; the cost of the incident does not appear. The buy-vs-build fact, which has only vague figures, is reworded as a decision or dropped, and is listed in the report as "needs a number".
+- T13: the newest role has at most 5 bullets, and no two lines make the same point (auditability appears once).
+- T14: the first bullet of the lead role states team size and "no line reports", and one bullet shows hands-on work with the tools named.
+- T15: skills are grouped, one labelled line per group, with no Kafka, Kubernetes, Elasticsearch, GCP, TypeScript, React, Git, Jira, pull requests or "ownership"; the report lists the skills left off for want of a fact.
+- T16: the summary does not say "applying" or name the role or company; the contact line has a city, email and phone; the word "payments" appears nowhere as the candidate's own experience, and any ad term used for the candidate's work is in the report as a reframe with its fact id.
 
 ## Baseline (no skill)
 
@@ -43,3 +53,18 @@ Run 2026-11-15, cases A, B and C with the skill loaded; helpers were unavailable
 - Case B: T8 pass. Two pages; three recent roles in full, two condensed to one bullet, three oldest as title, company and dates only; template CSS byte-identical.
 - Case C: T9 pass. The simulated page-count failure ran three rounds; the agent then stopped, showed the failing check, and noted that the real PDF was one page so the check itself looked faulty.
 - Real findings fixed along the way, in the template tests: CSS letter-spacing made headings extract as "S U M M A RY" and `text-transform` altered the name's case in the extracted text. Both removed, with tests to pin it.
+
+## Baseline for case D: a real CV (observed 2026-11-16)
+
+Not a run of this scenario. A CV the skill produced for a Payments Engineer ad, before the writing rules existed, was reviewed by a reader in the position of a recruiter or hiring manager. The review found, and case D reproduces:
+
+- T11 FAIL: "a big part of our tech planning", "a major part in saving a contract", "a big influence on the project", "(approximate figures)", "several thousand", "a few thousand".
+- T12 FAIL: the email-loop bullet led with the mistake and its cost; the buy-vs-build bullet set a few thousand against a multi-million result.
+- T13 FAIL: the newest role had 7 bullets, and auditability and "regulated" repeated the summary and each other.
+- T14 FAIL: "Engineering Lead" over 15 people, with no statement of line management or hands-on work.
+- T15 FAIL: a 40-item skills list in one block, with Rust, Kafka, Kubernetes, Elasticsearch, GCP and IaC claimed and no role using them; Git, Jira, pull requests and "ownership" as filler.
+- T16 FAIL: the summary spent a line on "Applying for the Payments Engineer role"; the contact line gave only "United Kingdom" and no phone.
+
+## Result with the writing rules, case D
+
+Run 2026-11-16 by the author inside the session that wrote the rules, not by a fresh agent: the rules were applied by hand to `career.vague.yaml` (with the simulated answers above), rendered, and the checker rules in `references/checks.md` were run mechanically over the extracted text. One page; no hedges; no cut or unevidenced skills; five bullets in the lead role; grouped skills extracted one labelled line per group; contact line whole. T10 (asking the questions) and the agent's own adherence to the rules are not yet tested: a fresh agent still has to run case D against the skill.

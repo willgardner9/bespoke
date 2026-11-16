@@ -26,7 +26,7 @@ If `career.yaml` already exists, say so, load it, and tell the person this run w
 
 ## 1. Collect documents
 
-Ask what they have: an existing CV, a LinkedIn profile, anything else (old appraisals, a bio). Accept files or pasted text. Never try to fetch a LinkedIn URL (it blocks automated access): ask for the profile's "Save to PDF" export (Profile, then More, then Save to PDF) or pasted text. No documents at all is fine; go straight to the interview.
+Ask what they have: an existing CV, a LinkedIn profile, anything else (old appraisals, a bio). Accept files or pasted text. Also ask for the contact details a CV needs: the city they are based in and a phone number (they go in `profile`; a country alone is not enough). Never try to fetch a LinkedIn URL (it blocks automated access): ask for the profile's "Save to PDF" export (Profile, then More, then Save to PDF) or pasted text. No documents at all is fine; go straight to the interview.
 
 ## 2. Prep
 
@@ -54,7 +54,7 @@ For each role, work through: the problem or goal, what they personally did, how 
 
 After each role, have a **fact writer** helper add the new facts to `career.yaml` in the background while you start the next role. Run one fact writer at a time: wait for the previous one to finish before starting the next, so two writers never overwrite each other. If helpers are unavailable, write them yourself after each role. Work that belongs to no role (side projects, unpaid or personal work) goes under `projects` in the schema.
 
-Facts follow the schema: `id` (`<role id>-f<n>`), `what`, `how`, `outcome`, `metric` only if given, `source: interview`. Keep the person's scope words exactly ("led", "contributed to", "owned", "supported").
+Facts follow the schema: `id` (`<role id>-f<n>`), `what`, `how`, `tech`, `outcome`, `metric` only if given, `source: interview`. Keep the person's scope words exactly ("led", "contributed to", "owned", "supported"). Ask what each piece of work was built with and record it in `tech`; turn vague amounts into a figure or a bound; for a role that leads people, record `management` and `hands_on` on the role.
 
 ## 5. Exploration rounds
 
@@ -62,12 +62,12 @@ This stage is deliberately open, because people forget their best material. Offe
 
 ## 6. Wrap-up
 
-First re-read `career.yaml` from disk (a helper may have changed it), then check it against the schema: required keys present, dates `YYYY-MM` or `present`, every fact has a valid `source`, no salary anywhere. Then show the **thin areas** (roles with no outcomes, facts with no numbers, roles with few facts) and offer to dig further now or on a later run. Say where the file is.
+First re-read `career.yaml` from disk (a helper may have changed it), then check it against the schema: required keys present, dates `YYYY-MM` or `present`, every fact has a valid `source`, no salary anywhere. Then show the **thin areas** (roles with no outcomes, facts with no numbers or only vague amounts, facts with no `tech`, leading roles with no `management`, skills no fact names, no city or phone in `profile`, roles with few facts) and offer to dig further now or on a later run. Say where the file is.
 
 ## Rules
 
 - Never store salary, anywhere.
-- Never write a fact the person did not say or supply in a document.
+- Never write a fact the person did not say or supply in a document. That includes `tech`: only tools the person said they used on that work.
 - Ask for what they have not said instead of guessing it. Leave a field out when they gave nothing for it; never write placeholders such as "no outcome yet".
 - Keep ids stable. Never renumber or delete existing facts.
 

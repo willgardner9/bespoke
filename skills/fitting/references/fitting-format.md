@@ -30,4 +30,5 @@ Verdict: strong|stretch|weak
 - Use the ad's own wording for each requirement, so `tailor` can mirror it.
 - `Keywords` holds exact terms from the ad (tools, methods, role words), not paraphrases.
 - `Keywords` may include the ad's terms for requirements that are a `gap`. `tailor` mirrors a keyword only when a `met` or `partial` requirement backs it, never one from a `gap`.
+- When a `partial` is partial because the ad's domain is one the candidate has not worked in (for example a payments role for someone from sanctions screening), write the line as `<requirement> (shared: <properties of the candidate's work that carry over>; missing: <what the candidate has not done>)`. `shared` names engineering or working properties the cited facts really show (for example exactly-once processing, correctness, traceability); `missing` names the domain or tool itself. `tailor` may use the `shared` words and never the `missing` ones.
 - If there are no open questions, write `- none`.

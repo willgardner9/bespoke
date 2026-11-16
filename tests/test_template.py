@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from render_helpers import TEMPLATE, month, fill_template, find_chrome, page_count, render_pdf
+from render_helpers import TEMPLATE, month, fill_template, find_chrome, page_count, render_pdf, set_slot
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 SLOTS = ["name", "contact", "summary", "experience", "projects", "education", "certifications", "skills"]
@@ -208,3 +208,42 @@ def test_header_name_and_employer_rule_are_restrained():
     assert float(re.search(r"h1\s*\{\s*font-size:\s*([\d.]+)pt", css).group(1)) <= 22
     rule = re.search(r"\.roles\.multi\s*\{[^}]*\}", css).group(0)
     assert "#bbb" in rule.lower()
+
+
+def test_summary_placeholder_does_not_ask_for_the_application():
+    html = template()
+    placeholder = re.search(r"<!--slot:summary-->(.*?)<!--/slot:summary-->", html, re.S).group(1)
+    assert "what you are applying for" not in placeholder.replace("Do not say what you are applying for.", "")
+    assert "Do not say what you are applying for" in placeholder
+
+
+def test_skills_slot_shows_grouped_labelled_lines():
+    html = template()
+    slot = re.search(r"<!--slot:skills-->(.*?)<!--/slot:skills-->", html, re.S).group(1)
+    assert slot.count("<p><b>") >= 2
+
+
+GROUPED_SKILLS = (
+    "<p><b>Languages:</b> Rust, TypeScript</p>"
+    "<p><b>Data and messaging:</b> Postgres, Pulsar</p>"
+    "<p><b>Observability:</b> Datadog, PagerDuty</p>"
+)
+
+
+@needs_chrome
+@needs_pdftotext
+def test_grouped_skills_extract_one_labelled_line_per_group(tmp_path):
+    html = set_slot(fill_template(career("career.sample.yaml")), "skills", GROUPED_SKILLS)
+    pdf = render_pdf(html, tmp_path)
+    text = subprocess.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True, check=True).stdout
+    for line in ("Languages: Rust, TypeScript", "Data and messaging: Postgres, Pulsar", "Observability: Datadog, PagerDuty"):
+        assert line in text, line
+
+
+@needs_chrome
+@needs_pdftotext
+def test_contact_line_with_city_and_phone_extracts_whole(tmp_path):
+    html = set_slot(fill_template(career("career.sample.yaml")), "contact", "London, UK | alex.morgan@example.com | +44 7700 900456 | linkedin.com/in/alexmorgan")
+    pdf = render_pdf(html, tmp_path)
+    text = subprocess.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True, check=True).stdout
+    assert "London, UK | alex.morgan@example.com | +44 7700 900456" in text

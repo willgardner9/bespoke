@@ -8,6 +8,10 @@ How to draw out what someone actually did. Pitch questions in plain words, one a
 - **Personal contribution.** If they say "we", ask what they themselves did.
 - **The counterfactual.** "What would have happened if you hadn't done that?" surfaces impact people take for granted.
 - **Chase a number, never suggest one.** Ask "Is there a figure that goes with that, even roughly?" If there isn't, leave `metric` out.
+- **Turn a vague amount into a figure or a bound.** "Several thousand", "a lot of users", "a big saving": ask "Roughly how many, or what is the least it could have been?" A bound such as "at least 2,000" is fine; an adjective is not.
+- **Name the stack.** For each piece of work ask "What did you build it with?" and put the answer in `tech`: languages, datastores, brokers, cloud services, tools. Ask per fact, because a skill used in one role is not evidence for another.
+- **Size of your part, in verbs.** If they say "a big part of" or "a major influence", ask "What did you personally do?" and record that instead.
+- **Leading people.** For any role where they lead a team, ask one question at a time: do they line-manage anyone (how many), or lead technically with no reports; how big is the team and who is in it; and what do they still do hands-on. Record `management` and `hands_on`.
 - **Process and decisions.** Ask how they went about it and what they chose not to do, because that is what employers read as competence.
 - **Stay in their words.** Keep their scope words and their terms for tools and methods; later skills mirror a job ad's wording only where it is true.
 
@@ -57,4 +61,4 @@ Purpose: fills `preferences`.
 
 ## Wrap-up questions
 
-After the rounds, list thin areas: roles with no outcomes, facts with no numbers, roles with very few facts. Offer to dig into any of them now or on a later run.
+After the rounds, list thin areas: roles with no outcomes, facts with no numbers or only vague amounts, facts with no `tech`, leading roles with no `management`, skills that no fact names, a `profile` with no city or no phone, and roles with very few facts. Offer to dig into any of them now or on a later run.

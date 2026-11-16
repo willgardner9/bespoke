@@ -46,7 +46,7 @@ If helpers are unavailable, say so and do the same steps in sequence.
 
 ## 3. Match
 
-For each must-have and nice-to-have, search `career.yaml` for evidence and cite fact ids. Mark each `met`, `partial` or `gap`. Evidence must genuinely show the requirement. A requirement that sounds likely for this person but has no fact behind it is a `gap`, never `met`.
+For each must-have and nice-to-have, search `career.yaml` for evidence and cite fact ids. Mark each `met`, `partial` or `gap`. Evidence must genuinely show the requirement. For a `partial` that is adjacent rather than smaller, name what carries over and what is missing, so `tailor` can use the ad's vocabulary for the true part and nothing for the rest. A requirement that sounds likely for this person but has no fact behind it is a `gap`, never `met`.
 
 ## 4. Verdict and questions
 

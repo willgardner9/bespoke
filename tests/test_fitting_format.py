@@ -44,3 +44,20 @@ def test_evidence_ids_exist_in_career_sample():
     parsed = parse_fitting(sample_text())
     cited = {e for m in parsed["must_haves"] + parsed["nice_to_haves"] for e in m["evidence"]}
     assert cited <= known
+
+
+def test_partial_line_with_shared_and_missing_parses():
+    parsed = parse_fitting((FIXTURES / "fitting.payments.md").read_text(encoding="utf-8"))
+    partial = [m for m in parsed["must_haves"] if m["status"] == "partial"]
+    assert partial
+    domain = next(m for m in partial if "money movement" in m["requirement"])
+    assert "shared:" in domain["requirement"] and "missing:" in domain["requirement"]
+    assert domain["evidence"] == ["r3-f3", "r2-f1"]
+
+
+def test_payments_fitting_cites_only_ids_in_vague_career():
+    career = yaml.safe_load((FIXTURES / "career.vague.yaml").read_text(encoding="utf-8"))
+    known = {f["id"] for r in career["roles"] for f in r["facts"]}
+    parsed = parse_fitting((FIXTURES / "fitting.payments.md").read_text(encoding="utf-8"))
+    cited = {e for m in parsed["must_haves"] + parsed["nice_to_haves"] for e in m["evidence"]}
+    assert cited <= known
