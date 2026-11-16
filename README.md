@@ -18,7 +18,7 @@ The CV only ever uses facts from your `career.yaml`. It mirrors the job ad's wor
 In Claude Code:
 
 ```
-/plugin marketplace add <github-user>/bespoke
+/plugin marketplace add willgardner9/bespoke
 /plugin install bespoke@bespoke
 ```
 
