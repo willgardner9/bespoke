@@ -52,6 +52,15 @@ def fill_template(career: dict, facts_per_role: int = 2, detail: bool = False) -
         multi = len(group) > 1
         span = f'{month(group[-1]["start"])} – {month(group[0]["end"])}'
         loc = group[0].get("location")
+        if not multi and not group[0]["facts"][:facts_per_role]:
+            role = group[0]
+            where = f', {loc}' if loc else ""
+            roles.append(
+                '<div class="employer compact"><div class="emp-head">'
+                f'<span>{role["company"]}, <span class="plain">{role["title"]}{where}</span></span>'
+                f'<span class="span">{span}</span></div></div>'
+            )
+            continue
         block = f'<div class="employer"><div class="emp-head"><span>{group[0]["company"]}</span><span class="span">{span}</span></div>'
         if loc:
             block += f'<div class="loc">{loc}</div>'
