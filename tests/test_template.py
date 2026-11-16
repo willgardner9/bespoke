@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from render_helpers import TEMPLATE, fill_template, find_chrome, page_count, render_pdf
+from render_helpers import TEMPLATE, month, fill_template, find_chrome, page_count, render_pdf
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 SLOTS = ["name", "contact", "summary", "experience", "projects", "education", "certifications", "skills"]
@@ -42,14 +42,31 @@ def test_font_is_arial_or_helvetica():
     assert families and all(f.strip().lower().startswith(("arial", "helvetica")) for f in families)
 
 
-def test_colours_are_black_and_white_except_the_employer_rule():
+GREY_RULES = (r"\.roles\.multi\s*\{[^}]*\}", r"\.emp-head \.span\s*\{[^}]*\}", r"\.loc\s*\{[^}]*\}")
+
+
+def test_colours_are_black_and_white_except_three_grey_details():
     css = template()
     assert not re.search(r"rgba?\(|hsla?\(", css)
-    rule = re.search(r"\.roles\.multi\s*\{[^}]*\}", css).group(0)
-    assert "#999" in rule
-    rest = css.replace(rule, "")
+    rest = css
+    for pattern in GREY_RULES:
+        rule = re.search(pattern, css).group(0)
+        assert re.search(r"#(bbb|666)\b", rule.lower()), pattern
+        rest = rest.replace(rule, "")
     hexes = {h.lower() for h in re.findall(r"#[0-9a-fA-F]{3,6}\b", rest)}
     assert hexes <= {"#000", "#000000", "#fff", "#ffffff"}
+
+
+def test_location_and_employer_dates_are_mid_grey_and_the_rule_is_hairline():
+    css = template()
+    assert "#666" in re.search(GREY_RULES[1], css).group(0)
+    assert "#666" in re.search(GREY_RULES[2], css).group(0)
+    rule = re.search(GREY_RULES[0], css).group(0)
+    assert float(re.search(r"border-left:\s*([\d.]+)pt", rule).group(1)) <= 0.5
+
+
+def test_template_shows_a_compact_sample_so_the_filler_sees_it():
+    assert 'class="employer compact"' in template()
 
 
 def test_a4_page_rules():
@@ -162,3 +179,32 @@ def test_grouping_keeps_one_employer_block_per_company():
     html = fill_template(data)
     assert html.count('class="employer"') == len({r["company"] for r in data["roles"]})
     assert html.count('class="roles multi"') == 1
+
+
+def bulletless(data: dict) -> dict:
+    data["roles"][-1]["facts"] = []
+    return data
+
+
+def test_bulletless_single_role_employer_uses_compact_entry():
+    html = fill_template(bulletless(career("career.sample.yaml")))
+    assert html.count('class="employer compact"') == 1
+    assert 'class="employer compact"' in template() or ".employer.compact" in template()
+
+
+@needs_chrome
+@needs_pdftotext
+def test_compact_entry_is_a_single_line_with_employer_title_and_dates(tmp_path):
+    data = bulletless(career("career.sample.yaml"))
+    last = data["roles"][-1]
+    pdf = render_pdf(fill_template(data), tmp_path)
+    text = subprocess.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True, check=True).stdout
+    line = next(l for l in text.splitlines() if last["company"] in l)
+    assert last["title"] in line and month(last["end"]) in line
+
+
+def test_header_name_and_employer_rule_are_restrained():
+    css = template()
+    assert float(re.search(r"h1\s*\{\s*font-size:\s*([\d.]+)pt", css).group(1)) <= 22
+    rule = re.search(r"\.roles\.multi\s*\{[^}]*\}", css).group(0)
+    assert "#bbb" in rule.lower()

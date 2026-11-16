@@ -14,7 +14,7 @@
     background: #fff;
     margin: 0;
   }
-  h1 { font-size: 26pt; line-height: 1.05; margin: 0 0 6pt; }
+  h1 { font-size: 21pt; line-height: 1.05; margin: 0 0 6pt; }
   h2 {
     font-size: 10.5pt;
     margin: 15pt 0 8pt;
@@ -26,9 +26,12 @@
   .summary { line-height: 1.5; }
   .employer { margin-bottom: 11pt; }
   .emp-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12pt; font-weight: bold; break-after: avoid; }
-  .emp-head .span { font-size: 10pt; font-weight: normal; }
-  .loc { margin-top: 1pt; break-after: avoid; }
-  .roles.multi { border-left: 1.5pt solid #999; margin: 7pt 0 0 1pt; padding-left: 11pt; }
+  .emp-head .span { font-size: 10pt; font-weight: normal; color: #666; }
+  .employer.compact { margin-bottom: 6pt; }
+  .employer.compact .emp-head { font-size: 10pt; }
+  .plain { font-weight: normal; }
+  .loc { margin-top: 1pt; break-after: avoid;  color: #666; }
+  .roles.multi { border-left: 0.5pt solid #bbb; margin: 7pt 0 0 1pt; padding-left: 11pt; }
   .role { margin-top: 7pt; }
   .roles.single .role { margin-top: 3pt; }
   .role-head { display: flex; justify-content: space-between; align-items: baseline; font-weight: bold; font-size: 10.5pt; break-after: avoid; }
@@ -51,7 +54,7 @@
 
 <section>
   <h2>Experience</h2>
-  <div data-slot="experience"><!--slot:experience--><div class="employer"><div class="emp-head"><span>Company</span><span class="span">Mar 2021 – Present</span></div><div class="loc">Location</div><div class="roles multi"><div class="role"><div class="role-head"><span>Job Title</span><span class="dates">Mar 2021 – Present</span></div><ul><li>Achievement or responsibility, with the outcome and a number if one exists.</li></ul></div></div></div><!--/slot:experience--></div>
+  <div data-slot="experience"><!--slot:experience--><div class="employer"><div class="emp-head"><span>Company</span><span class="span">Mar 2021 – Present</span></div><div class="loc">Location</div><div class="roles multi"><div class="role"><div class="role-head"><span>Job Title</span><span class="dates">Mar 2021 – Present</span></div><ul><li>Achievement or responsibility, with the outcome and a number if one exists.</li></ul></div></div></div><div class="employer compact"><div class="emp-head"><span>Company with no bullets, <span class="plain">Job Title, Location</span></span><span class="span">Sep 2016 – Feb 2018</span></div></div><!--/slot:experience--></div>
 </section>
 
 <section data-section="projects">

@@ -21,6 +21,7 @@ Read the extracted PDF text and check:
 
 - the reading order is correct: name, contact line, summary, then experience newest first, education, skills;
 - each employer appears once, with all its roles beneath it and the employer span matching the earliest start and latest end of those roles;
+- any employer with one role and no bullets is the one-line compact entry, not a full employer block;
 - the headings are the standard words Summary, Experience, Education, Skills (plus Projects and Certifications when present), extracted whole;
 - accents and en dashes in names and dates survived (for example "Zoë Ñuñez", "Mar 2021 – Present");
 - there are no tables, multi-column layouts, icons, images or text boxes in the HTML;
