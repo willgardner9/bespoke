@@ -42,10 +42,13 @@ def test_font_is_arial_or_helvetica():
     assert families and all(f.strip().lower().startswith(("arial", "helvetica")) for f in families)
 
 
-def test_colours_are_black_and_white_only():
+def test_colours_are_black_and_white_except_the_employer_rule():
     css = template()
     assert not re.search(r"rgba?\(|hsla?\(", css)
-    hexes = {h.lower() for h in re.findall(r"#[0-9a-fA-F]{3,6}\b", css)}
+    rule = re.search(r"\.roles\.multi\s*\{[^}]*\}", css).group(0)
+    assert "#999" in rule
+    rest = css.replace(rule, "")
+    hexes = {h.lower() for h in re.findall(r"#[0-9a-fA-F]{3,6}\b", rest)}
     assert hexes <= {"#000", "#000000", "#fff", "#ffffff"}
 
 
